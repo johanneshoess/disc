@@ -1,0 +1,45 @@
+= Disc Database Schema
+:neo4j-version: 3.0.6
+:author: Kalle Hilsenbek
+
+== Introduction
+
+This is the basic domain model for Disc.
+Roles and User aren't integrated. For this checkout first:
+https://neo4j.com/use-cases/identity-and-access-management/
+
+To enable Fulltextsearch checkout:
+https://neo4j.com/developer/kb/fulltext-search-in-neo4j/
+
+//setup
+//hide
+[source,cypher]
+----
+CREATE
+  (init:Argument{title:'init',text:'Kalle drückt sich nur vor seiner Bachelorarbeit', ts:timestamp(), popular:'low'}),
+  (foo:Argument{title:'foo',text:'Johannes liebt panierte Kürbise', ts:timestamp(), popluar:'low'}),
+  (crazyShit:Hashtag{title:'crazyShit'}),
+  (init)-[:rel{up:0, down:0, crushed:false}]->(foo),
+  (init)-[:tag]->(crazyShit),
+  (foo)-[:tag]->(crazyShit)
+----
+
+//graph
+
+== Find related Arguments
+
+The Query should be bidirectional to find all nodes,
+because relationships are stored directional.
+[source,cypher]
+----
+Match (a:Argument)--(b:Argument)
+RETURN (a),(b)
+----
+
+== Find Arguments over Hashtags
+
+[source,cypher]
+----
+Match (h:Hashtag)--(a:Argument)
+RETURN (h),(a)
+----

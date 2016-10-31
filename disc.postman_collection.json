@@ -1,0 +1,45 @@
+{
+	"variables": [],
+	"info": {
+		"name": "disc",
+		"_postman_id": "7ff77b13-fdeb-364f-c100-54bdb501006b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:7474/db/data/",
+			"request": {
+				"url": "http://localhost:7474/db/data/",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "basic informations"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:7474/db/data/cypher",
+			"request": {
+				"url": "http://localhost:7474/db/data/cypher",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic bmVvNGo6ZGlzY29mdWNrZXJz",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\" : \"Match (a:Argument)--(b:Argument) RETURN (a),(b)\"\n}"
+				},
+				"description": "find related arguments"
+			},
+			"response": []
+		}
+	]
+}
